@@ -33,6 +33,9 @@ public class Transaction {
 	public Long getAccountId() {
 		return accountId;
 	}
+	public Transaction() {
+		super();
+	}
 	public Long getId() {
 		return id;
 	}

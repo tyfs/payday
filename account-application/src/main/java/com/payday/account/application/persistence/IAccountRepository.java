@@ -10,7 +10,10 @@ import com.payday.account.domain.models.Transaction;
 @Service
 public interface IAccountRepository {
   Account Create(Account account);
-  Account FindById(Long id);
+  Transaction CreateTransaction(Transaction transaction);
+  Account FindById(Long userId, Long id);
+  void DeleteAll();
+  void DeleteAllTransactions();
   List<Account> FindByUserId(Long userId);
-  List<Transaction> FindTransactions(Long accountId); 
+  List<Transaction> FindTransactions(Long userId, Long accountId); 
 }

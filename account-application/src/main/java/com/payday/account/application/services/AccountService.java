@@ -20,8 +20,8 @@ public class AccountService implements IAccountService{
 	}
 
 	@Override
-	public Account FindById(Long id) { 
-		return accountRepository.FindById(id);
+	public Account FindById(Long userId, Long id) { 
+		return accountRepository.FindById(userId, id);
 	}
 
 	@Override
@@ -30,8 +30,8 @@ public class AccountService implements IAccountService{
 	}
 
 	@Override
-	public List<Transaction> FindTransactions(Long accountId) {
-		return accountRepository.FindTransactions(accountId);
+	public List<Transaction> FindTransactions(Long userId, Long accountId) {
+		return accountRepository.FindTransactions(userId, accountId);
 	}
 
 }

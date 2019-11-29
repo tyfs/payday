@@ -24,7 +24,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.payday.iam.api.models.v1.UserDto;
+import com.payday.iam.api.models.v1.LoginRequestDto;
 import com.payday.iam.application.services.IUserService;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -42,8 +42,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest req,
                                                 HttpServletResponse res) throws AuthenticationException {
         try {
-            UserDto creds = new ObjectMapper()
-                    .readValue(req.getInputStream(), UserDto.class);
+            LoginRequestDto creds = new ObjectMapper()
+                    .readValue(req.getInputStream(), LoginRequestDto.class);
 
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(

@@ -28,6 +28,10 @@ public class Account {
 	@Enumerated(EnumType.ORDINAL)
 	private AccountStatus status;
 	
+	public Account() {
+		super();
+	}
+
 	public Account(Long userId, AccountType type, BigDecimal balance, LocalDateTime createdAt, AccountStatus status) {
 		super();
 		this.userId = userId;

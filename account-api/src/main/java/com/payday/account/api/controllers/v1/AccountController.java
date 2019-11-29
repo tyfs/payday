@@ -1,5 +1,6 @@
 package com.payday.account.api.controllers.v1;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,23 +30,25 @@ public class AccountController {
 	
 	@GetMapping("")
 	@ResponseBody
-	public List<AccountDto> getAccounts() {
-		Long userId = 1L;
+	public List<AccountDto> getAccounts(Principal principal) {
+		Long userId = Long.parseLong(principal.getName());
 		List<Account> accounts = accountService.FindByUserId(userId);
 		return convertAccountToDtos(accounts);
 	}
 
 	@GetMapping("/{id}")
 	@ResponseBody
-	public AccountDto getAccount(@PathVariable Long id) {
-		Account account = accountService.FindById(id);
+	public AccountDto getAccount(@PathVariable Long id, Principal principal) {
+		Long userId = Long.parseLong(principal.getName());
+		Account account = accountService.FindById(userId, id);
 		return convertToDto(account);
 	}
 	
 	@GetMapping("/{id}/transactions")
 	@ResponseBody
-	public List<TransactionDto> getAccountTransactions(@PathVariable Long id) {
-		List<Transaction> transactions = accountService.FindTransactions(id);
+	public List<TransactionDto> getAccountTransactions(@PathVariable Long id,Principal principal) {
+		Long userId = Long.parseLong(principal.getName());
+		List<Transaction> transactions = accountService.FindTransactions(userId, id);
 		return convertTransactionToDtos(transactions);
 	}
 

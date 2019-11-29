@@ -7,7 +7,7 @@ import com.payday.account.domain.models.Transaction;
 
 public interface IAccountService {
 	Account Create(Account account);
-	Account FindById(Long id);
+	Account FindById(Long userId, Long id);
 	List<Account> FindByUserId(Long userId);
-	List<Transaction> FindTransactions(Long accountId);
+	List<Transaction> FindTransactions(Long userId, Long accountId);
 }

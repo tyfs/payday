@@ -1,12 +1,14 @@
 package com.payday.iam.api.security;
 
 
-import static com.payday.iam.api.security.SecurityConstants.SIGN_UP_URL;
 import static com.payday.iam.api.security.SecurityConstants.LOGIN_URL;
+import static com.payday.iam.api.security.SecurityConstants.SIGN_UP_URL;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -26,6 +28,13 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
     
+    @Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
+
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         
@@ -36,8 +45,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers(HttpMethod.POST, LOGIN_URL)                
                 .permitAll()
-                .and()
-                .formLogin().loginPage("/login").loginProcessingUrl(LOGIN_URL).permitAll()
                 .and()                
                 .addFilter(getAuthenticationFilter());                
         
